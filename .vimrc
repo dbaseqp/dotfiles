@@ -42,7 +42,7 @@ endif
 
 " REMAPS
 "------------------------------------------------------------
-nnoremap <C-L> :nohl<CR><C-L>       " clear search highlighting
+nnoremap <C-E> :nohl<CR><C-L>       " clear search highlighting
 map Y y$
 nnoremap <C-H> <C-W>h               " move focus left split
 nnoremap <C-J> <C-W>j               " move focus down split 
