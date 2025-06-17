@@ -26,15 +26,15 @@ set ruler                           " show cursor position
 set confirm                         " display prompt to save changes when not specfied at exit
 
 " VIM RECOMMENDED
-set visualbell  
-set t_vb=                    
-set hidden
-set wildmenu
+set visualbell                      " silence bell
+set t_vb=                           " disable screen flash bell
+set hidden                          " replace buffers without needing to save them by deferring until vim exits
+set wildmenu                        " select menu in command mode
 set backspace=indent,eol,start
-set nostartofline
-set laststatus=2
-set cmdheight=2                     
-set pastetoggle=<F11>
+set nostartofline                   " preserve column position when using motions
+set laststatus=2                    " line height of status bar
+set cmdheight=2                     " line height of command bar
+set pastetoggle=<F11>               " toggle auto-indent when pasting
 if has('filetype')
   filetype indent plugin on
 endif
@@ -48,8 +48,8 @@ nnoremap <C-H> <C-W>h               " move focus left split
 nnoremap <C-J> <C-W>j               " move focus down split 
 nnoremap <C-K> <C-W>k               " move focus up split 
 nnoremap <C-L> <C-W>l               " move focus right split
-nnoremap <leader>h :new<CR>         " new creates a horizontal split
-nnoremap <leader>v :vnew<CR>        " vnew creates a vertical split
+nnoremap <leader>" :new<CR>         " create horizontal split
+nnoremap <leader>% :vnew<CR>        " create vertical split
 
 " undo
 set undofile
@@ -63,7 +63,7 @@ function! NumberToggle()
                 set nornu
         endif
 endfunction
-nnoremap <F12> :call NumberToggle()<CR>       " F12 toggles between relative and absolute line numbers
+nnoremap <leader>rnu :call NumberToggle()<CR>
 "------------------------------------------------------------
 
 " INSTALL MISSING PLUGINS
