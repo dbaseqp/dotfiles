@@ -2,6 +2,7 @@
 
 " VIM BASICS
 "------------------------------------------------------------
+let mapleader=" "                   " use space as leader
 syntax on                           " syntax highlighting
 set nocompatible                    " allow for portable testing of this file
 set ai si                           " auto and smart indent
@@ -17,15 +18,11 @@ set ts=4 sw=4                       " tab and indent size
 set cursorline                      " enable cursor line
 set incsearch hlsearch              " incremental and highlight search
 set splitbelow splitright           " logical split directions
-let mapleader=" "                   " use space as leader
-set clipboard^=unamedplus,unamed    " use system clipboard
 set nomodeline                      " for security purposes
 set ignorecase                      " case insensitve searching
 set smartcase                       " case sensitive searching for capital letters only
 set ruler                           " show cursor position
 set confirm                         " display prompt to save changes when not specfied at exit
-
-" VIM RECOMMENDED
 set visualbell                      " silence bell
 set t_vb=                           " disable screen flash bell
 set hidden                          " replace buffers without needing to save them by deferring until vim exits
@@ -34,6 +31,7 @@ set backspace=indent,eol,start
 set nostartofline                   " preserve column position when using motions
 set laststatus=2                    " line height of status bar
 set cmdheight=2                     " line height of command bar
+set paste                           " paste as raw by default
 set pastetoggle=<F11>               " toggle auto-indent when pasting
 if has('filetype')
   filetype indent plugin on
@@ -68,21 +66,21 @@ nnoremap <leader>rnu :call NumberToggle()<CR>
 
 " INSTALL MISSING PLUGINS
 "------------------------------------------------------------
-if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME}/.vim/pack/vendor/start/nerdtree/LICENCE"'))
-        echo "Installing plugins...\n"
-        silent !git clone https://github.com/preservim/nerdtree.git ${XDG_CONFIG_HOME:-$HOME}/.vim/pack/vendor/start/nerdtree
-        silent !vim -u NONE -c "helptags ~/.vim/pack/vendor/start/nerdtree/doc" -c -q
-endif
+"if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME}/.vim/pack/vendor/start/nerdtree/LICENCE"'))
+"        echo "Installing plugins...\n"
+"        silent !git clone https://github.com/preservim/nerdtree.git ${XDG_CONFIG_HOME:-$HOME}/.vim/pack/vendor/start/nerdtree
+"        silent !vim -u NONE -c "helptags ~/.vim/pack/vendor/start/nerdtree/doc" -c -q
+"endif
 
 " PLUGINS CONFIGS
 "------------------------------------------------------------
 " nerdtree
-nmap <leader>n :NERDTreeFocus<CR>                   " cursor focus on nerd tree
-nmap <C-t> :NERDTreeToggle<CR>                      " toggle nerd tree
-autocmd vimenter * NERDTree | wincmd p
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-autocmd bufwinenter * silent NERDTreeMirror
-let NERDTreeShowLineNumbers=1
+"nmap <leader>n :NERDTreeFocus<CR>                   " cursor focus on nerd tree
+"nmap <C-t> :NERDTreeToggle<CR>                      " toggle nerd tree
+"autocmd vimenter * NERDTree | wincmd p
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"autocmd bufwinenter * silent NERDTreeMirror
+"let NERDTreeShowLineNumbers=1
 
 
 "------------------------------------------------------------
