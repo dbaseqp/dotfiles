@@ -2,19 +2,32 @@
 
 # Install zsh using the appropriate package manager
 if command -v dnf >/dev/null 2>&1; then
-    sudo dnf install -y zsh
+    sudo dnf install -y zsh zoxide fzf
 elif command -v yum >/dev/null 2>&1; then
-    sudo yum install -y zsh
+    sudo yum install -y zsh zoxide fzf
 elif command -v apt >/dev/null 2>&1; then
-    sudo apt update && sudo apt install -y zsh
+    sudo apt update && sudo apt install -y zsh zoxide fzf
 else
     echo "No supported package manager found (dnf, yum, apt)." >&2
     exit 1
 fi
 
+# Distro packages sometimes lack zoxide; fall back to the upstream installer.
+if ! command -v zoxide >/dev/null 2>&1; then
+    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+fi
+
+# Same for fzf: install the binary only, without touching shell rc files.
+if ! command -v fzf >/dev/null 2>&1; then
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install --bin
+fi
+
 chsh -s $(which zsh)
 
-# Install p10k
+# Install oh-my-zsh and powerlevel10k. This block is Zsh (anonymous function,
+# ${rc:t}); the script itself is Bash.
+zsh <<'EOF'
 () {
   emulate -L zsh -o xtrace -o err_return
   ZDOTDIR=/no/such/dir command zsh -ic '[[ $ZDOTDIR == /no/such/dir ]]'
@@ -34,8 +47,8 @@ chsh -s $(which zsh)
   command git clone -- https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
   command git clone --depth=1 -- https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
   command sed -- 's|robbyrussell|powerlevel10k/powerlevel10k|' ~/.oh-my-zsh/templates/zshrc.zsh-template >~/.zshrc
-  ZDOTDIR=~ exec zsh -i
 }
+EOF
 
 # zsh plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions

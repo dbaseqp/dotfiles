@@ -81,6 +81,11 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf-zsh-plugin)
 
 source $ZSH/oh-my-zsh.sh
 
+# zoxide: `z` jumps to frecency-ranked directories. `zi` is the interactive picker.
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"

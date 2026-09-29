@@ -59,7 +59,7 @@ set laststatus=2
 set statusline=%F\ %y\ %m\ %r\ %h\ %w\ %{&filetype}\ [%l/%L]\ [%p%%]
 " set visible tabs
 set list
-set listchars=tab:..,trail:..
+set listchars=tab:..,trail:.
 " line height of command bar
 set cmdheight=2
 " paste as raw by default
